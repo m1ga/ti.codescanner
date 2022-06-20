@@ -1,0 +1,37 @@
+
+20.6.2022, 14:17:17
+
+Operating System
+  Name                        = Fedora
+  Version                     = 36
+  Architecture                = 64bit
+  # CPUs                      = 12
+  Memory                      = 16271482880
+
+Node.js
+  Node.js Version             = 16.15.1
+  npm Version                 = 8.11.0
+
+Titanium CLI
+  CLI Version                 = 6.0.2
+
+Titanium SDK
+  SDK Version                 = 11.0.0.RC
+  SDK Path                    = /home/miga/.titanium/mobilesdk/linux/11.0.0.RC
+  Target Platform             = android
+
+Command
+  /usr/local/bin/node /usr/local/bin/ti clean
+
+[DEBUG]  Deleting /home/miga/dev/ti.codescanner/android/build/.gradle
+[DEBUG]  Deleting /home/miga/dev/ti.codescanner/android/build/build.gradle
+[DEBUG]  Deleting /home/miga/dev/ti.codescanner/android/build/build_android.log
+[DEBUG]  Deleting /home/miga/dev/ti.codescanner/android/build/gradle
+[DEBUG]  Deleting /home/miga/dev/ti.codescanner/android/build/gradle.properties
+[DEBUG]  Deleting /home/miga/dev/ti.codescanner/android/build/gradlew
+[DEBUG]  Deleting /home/miga/dev/ti.codescanner/android/build/gradlew.bat
+[DEBUG]  Deleting /home/miga/dev/ti.codescanner/android/build/local.properties
+[DEBUG]  Deleting /home/miga/dev/ti.codescanner/android/build/module
+[DEBUG]  Deleting /home/miga/dev/ti.codescanner/android/build/settings.gradle
+[DEBUG]  Deleting /home/miga/dev/ti.codescanner/android/build/ti.constants.gradle
+[DEBUG]  Deleting /home/miga/dev/ti.codescanner/android/dist

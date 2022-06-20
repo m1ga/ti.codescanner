@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ti:module xmlns:ti="http://ti.tidev.io" xmlns:android="http://schemas.android.com/apk/res/android">
+	<!-- Similar to tiapp.xml, but contains module/platform specific configuration in <iphone> and <android> sections -->
+	<android xmlns:android="http://schemas.android.com/apk/res/android">
+		<application>
+			<meta-data android:name="com.google.mlkit.vision.DEPENDENCIES" android:value="barcode_ui"/>
+		</application>
+
+	</android>
+</ti:module>
