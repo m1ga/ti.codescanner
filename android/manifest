@@ -2,7 +2,7 @@
 # this is your module manifest and used by Titanium
 # during compilation, packaging, distribution, etc.
 #
-version: 1.0.0
+version: 1.0.1
 apiversion: 4
 architectures: arm64-v8a armeabi-v7a x86 x86_64
 description: ti.codescanner
@@ -15,4 +15,4 @@ name: ti.codescanner
 moduleid: ti.codescanner
 guid: 32d067bf-11ac-4fb0-9f48-2d92e3238981
 platform: android
-minsdk: 10.0.0.GA
+minsdk: 9.0.0.GA
