@@ -4,6 +4,6 @@ codescanner.addEventListener("complete", e => {
 	console.log(e.value);
 })
 win.addEventListener("click", e => {
-	codescanner.scan();
+	codescanner.scan({autoZoom: false});
 });
 win.open();

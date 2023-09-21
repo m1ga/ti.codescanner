@@ -8,11 +8,13 @@
 package ti.codescanner;
 
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanner;
+import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions;
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanning;
 
 import org.appcelerator.kroll.KrollDict;
 import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.annotations.Kroll;
+import org.appcelerator.kroll.common.Log;
 import org.appcelerator.titanium.TiApplication;
 
 
@@ -32,17 +34,25 @@ public class TiCodescannerModule extends KrollModule {
 
     // Methods
     @Kroll.method
-    public void scan() {
+    public void scan(@Kroll.argument(optional = true) KrollDict opts) {
+        GmsBarcodeScanner scanner = null;
+        if (opts != null) {
+            if (opts.containsKeyAndNotNull("autoZoom") && opts.getBoolean("autoZoom")) {
+                GmsBarcodeScannerOptions options = new GmsBarcodeScannerOptions.Builder()
+                        .enableAutoZoom()
+                        .build();
+                scanner = GmsBarcodeScanning.getClient(TiApplication.getAppCurrentActivity(), options);
+            }
+        }
         /*
-        // TODO: add options
-        GmsBarcodeScannerOptions options = new GmsBarcodeScannerOptions.Builder()
+        TODO: add more options
                 .setBarcodeFormats(
                         Barcode.FORMAT_QR_CODE,
                         Barcode.FORMAT_AZTEC)
-                .build();
-                GmsBarcodeScanner scanner = GmsBarcodeScanning.getClient(TiApplication.getAppCurrentActivity(), options);
          */
-        GmsBarcodeScanner scanner = GmsBarcodeScanning.getClient(TiApplication.getAppCurrentActivity());
+        if (scanner == null) {
+            scanner = GmsBarcodeScanning.getClient(TiApplication.getAppCurrentActivity());
+        }
         scanner.startScan().addOnSuccessListener(
                         barcode -> {
                             String rawValue = barcode.getRawValue();
