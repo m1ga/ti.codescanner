@@ -27,6 +27,10 @@ win.open();
 ## Methods
 * scan
 
+## Known issues
+
+On some phones the code scanner might not work or open/closes right away without any error. The `Google Play Services` could be an issue. 
+The Titanium module only calls one function from Googles library. If you have a non-working phone you would need to use their support pages: https://developers.google.com/ml-kit/community
 
 ## Author
 
