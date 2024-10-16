@@ -76,9 +76,7 @@ public class TiCodescannerModule extends KrollModule {
 
             if (opts.containsKeyAndNotNull("formats")) {
                 int[] formats = opts.getIntArray("formats");
-                for (int value : formats) {
-                    buildOptions.setBarcodeFormats(value);
-                }
+                buildOptions.setBarcodeFormats(formats[0], formats);
             }
 
             scanner = GmsBarcodeScanning.getClient(TiApplication.getAppCurrentActivity(), buildOptions.build());
