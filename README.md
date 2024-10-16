@@ -1,4 +1,4 @@
-# ti.codescanner - Titanium code scanner module for Andorid
+# ti.codescanner - Titanium code scanner module for Android
 
 ## Scan codes (QR, Barcodes) without any camera permission!
 
@@ -22,6 +22,7 @@ win.open();
 
 ## Events
 * <b>complete</b> -> event.value
+* <b>cancel</b>
 * <b>error</b> -> event.message
 
 ## Methods

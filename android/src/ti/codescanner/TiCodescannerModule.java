@@ -40,16 +40,16 @@ public class TiCodescannerModule extends KrollModule {
             if (opts.containsKeyAndNotNull("autoZoom") && opts.getBoolean("autoZoom")) {
                 GmsBarcodeScannerOptions options = new GmsBarcodeScannerOptions.Builder()
                         .enableAutoZoom()
+                        /*
+                        .setBarcodeFormats(
+                          Barcode.FORMAT_CODE_128
+                        )
+                        */
                         .build();
                 scanner = GmsBarcodeScanning.getClient(TiApplication.getAppCurrentActivity(), options);
             }
         }
-        /*
-        TODO: add more options
-                .setBarcodeFormats(
-                        Barcode.FORMAT_QR_CODE,
-                        Barcode.FORMAT_AZTEC)
-         */
+
         if (scanner == null) {
             scanner = GmsBarcodeScanning.getClient(TiApplication.getAppCurrentActivity());
         }
@@ -65,6 +65,12 @@ public class TiCodescannerModule extends KrollModule {
                             KrollDict kd = new KrollDict();
                             kd.put("message", e.getMessage());
                             fireEvent("error", kd);
+                        })
+                .addOnCanceledListener(
+                        () -> {
+                            KrollDict kd = new KrollDict();
+                            kd.put("message", "Test");
+                            fireEvent("cancel", kd);
                         });
 
     }
