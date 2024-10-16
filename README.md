@@ -15,7 +15,10 @@ codescanner.addEventListener("complete", e => {
 	console.log(e.value);
 })
 win.addEventListener("click", e => {
-	codescanner.scan();
+	codescanner.scan({
+		autoZoom: false,
+		formats: [codescanner.FORMAT_QR_CODE] // only scan QR Codes
+	});
 });
 win.open();
 ```
@@ -26,11 +29,31 @@ win.open();
 * <b>error</b> -> event.message
 
 ## Methods
-* scan
+* <b>scan({})</b>
+	optional parameters:
+	* autoZoom: boolean
+	* formats: [int array of constants]
+
+## Constants:
+* FORMAT_UNKNOWN
+* FORMAT_ALL_FORMATS
+* FORMAT_CODE_128
+* FORMAT_CODE_39
+* FORMAT_CODE_93
+* FORMAT_CODABAR
+* FORMAT_DATA_MATRIX
+* FORMAT_EAN_13
+* FORMAT_EAN_8
+* FORMAT_ITF
+* FORMAT_QR_CODE
+* FORMAT_UPC_A
+* FORMAT_UPC_E
+* FORMAT_PDF417
+* FORMAT_AZTEC
 
 ## Known issues
 
-On some phones the code scanner might not work or open/closes right away without any error. The `Google Play Services` could be an issue. 
+On some phones the code scanner might not work or open/closes right away without any error. The `Google Play Services` could be an issue.
 The Titanium module only calls one function from Googles library. If you have a non-working phone you would need to use their support pages: https://developers.google.com/ml-kit/community
 
 ## Author

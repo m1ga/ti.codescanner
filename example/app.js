@@ -4,6 +4,9 @@ codescanner.addEventListener("complete", e => {
 	console.log(e.value);
 })
 win.addEventListener("click", e => {
-	codescanner.scan({autoZoom: false});
+	codescanner.scan({
+		autoZoom: false,
+		formats: [codescanner.FORMAT_QR_CODE]
+	});
 });
 win.open();

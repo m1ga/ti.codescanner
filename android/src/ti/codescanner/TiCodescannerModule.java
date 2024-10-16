@@ -7,6 +7,7 @@
  */
 package ti.codescanner;
 
+import com.google.mlkit.vision.barcode.common.Barcode;
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanner;
 import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions;
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanning;
@@ -14,12 +15,43 @@ import com.google.mlkit.vision.codescanner.GmsBarcodeScanning;
 import org.appcelerator.kroll.KrollDict;
 import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.annotations.Kroll;
-import org.appcelerator.kroll.common.Log;
 import org.appcelerator.titanium.TiApplication;
 
 
 @Kroll.module(name = "TiCodescanner", id = "ti.codescanner")
 public class TiCodescannerModule extends KrollModule {
+
+    @Kroll.constant
+    public static final int FORMAT_UNKNOWN = Barcode.FORMAT_UNKNOWN;
+    @Kroll.constant
+    public static final int FORMAT_ALL_FORMATS = Barcode.FORMAT_ALL_FORMATS;
+    @Kroll.constant
+    public static final int FORMAT_CODE_128 = Barcode.FORMAT_CODE_128;
+    @Kroll.constant
+    public static final int FORMAT_CODE_39 = Barcode.FORMAT_CODE_39;
+    @Kroll.constant
+    public static final int FORMAT_CODE_93 = Barcode.FORMAT_CODE_93;
+    @Kroll.constant
+    public static final int FORMAT_CODABAR = Barcode.FORMAT_CODABAR;
+    @Kroll.constant
+    public static final int FORMAT_DATA_MATRIX = Barcode.FORMAT_DATA_MATRIX;
+    @Kroll.constant
+    public static final int FORMAT_EAN_13 = Barcode.FORMAT_EAN_13;
+    @Kroll.constant
+    public static final int FORMAT_EAN_8 = Barcode.FORMAT_EAN_8;
+    @Kroll.constant
+    public static final int FORMAT_ITF = Barcode.FORMAT_ITF;
+    @Kroll.constant
+    public static final int FORMAT_QR_CODE = Barcode.FORMAT_QR_CODE;
+    @Kroll.constant
+    public static final int FORMAT_UPC_A = Barcode.FORMAT_UPC_A;
+    @Kroll.constant
+    public static final int FORMAT_UPC_E = Barcode.FORMAT_UPC_E;
+    @Kroll.constant
+    public static final int FORMAT_PDF417 = Barcode.FORMAT_PDF417;
+    @Kroll.constant
+    public static final int FORMAT_AZTEC = Barcode.FORMAT_AZTEC;
+
 
     // Standard Debugging variables
     private static final String LCAT = "TiCodescannerModule";
@@ -37,17 +69,19 @@ public class TiCodescannerModule extends KrollModule {
     public void scan(@Kroll.argument(optional = true) KrollDict opts) {
         GmsBarcodeScanner scanner = null;
         if (opts != null) {
+            GmsBarcodeScannerOptions.Builder buildOptions = new GmsBarcodeScannerOptions.Builder();
             if (opts.containsKeyAndNotNull("autoZoom") && opts.getBoolean("autoZoom")) {
-                GmsBarcodeScannerOptions options = new GmsBarcodeScannerOptions.Builder()
-                        .enableAutoZoom()
-                        /*
-                        .setBarcodeFormats(
-                          Barcode.FORMAT_CODE_128
-                        )
-                        */
-                        .build();
-                scanner = GmsBarcodeScanning.getClient(TiApplication.getAppCurrentActivity(), options);
+                buildOptions.enableAutoZoom();
             }
+
+            if (opts.containsKeyAndNotNull("formats")) {
+                int[] formats = opts.getIntArray("formats");
+                for (int value : formats) {
+                    buildOptions.setBarcodeFormats(value);
+                }
+            }
+
+            scanner = GmsBarcodeScanning.getClient(TiApplication.getAppCurrentActivity(), buildOptions.build());
         }
 
         if (scanner == null) {
@@ -69,7 +103,7 @@ public class TiCodescannerModule extends KrollModule {
                 .addOnCanceledListener(
                         () -> {
                             KrollDict kd = new KrollDict();
-                            kd.put("message", "Test");
+                            kd.put("message", "");
                             fireEvent("cancel", kd);
                         });
 
