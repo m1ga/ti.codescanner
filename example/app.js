@@ -6,7 +6,7 @@ codescanner.addEventListener("complete", e => {
 win.addEventListener("click", e => {
 	codescanner.scan({
 		autoZoom: false,
-		formats: [codescanner.FORMAT_QR_CODE]
+		formats: [codescanner.FORMAT_QR_CODE, codescanner.FORMAT_CODE_128]
 	});
 });
 win.open();
